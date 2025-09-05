@@ -1,0 +1,4 @@
+/home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles/communication_test.dir
+/home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles/impedance_control.dir
+/home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles/edit_cache.dir
+/home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles/rebuild_cache.dir

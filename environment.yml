@@ -1,0 +1,7 @@
+name: collector_env
+channels:
+  - conda-forge
+dependencies:
+  - cmake=3.22
+  - eigen
+  - ninja
