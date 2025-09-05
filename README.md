@@ -46,4 +46,3 @@ cmake -S . -B build \
 cmake --build build -j
 ```
 
-That's it — the commands above are rendered as code blocks so they are easier to copy and run.

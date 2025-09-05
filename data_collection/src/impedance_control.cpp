@@ -55,13 +55,13 @@ int main ()
         robot.setCartesianImpedance({{3000, 3000, 3000, 300, 300, 300}});
 
         //set robot payload
-        /*robot.setLoad(
-            0.2,                                       // mass
+        robot.setLoad(
+            0.0,                                       // mass
             {0.0, 0.0, 0.1},                          // CoM in tool frame (example)
             {0.0, 0.0, 0.0,                            // 3x3 inertia matrix (flat array)
             0.0, 0.0, 0.0,
             0.0, 0.0, 0.0}
-        );*/
+        );
 
         // Load the robot model
         franka::Model model(robot.loadModel());
