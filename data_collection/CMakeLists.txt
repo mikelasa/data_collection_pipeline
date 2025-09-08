@@ -13,8 +13,10 @@ find_package(Eigen3 REQUIRED)
 # executables
 add_executable(communication_test src/communication_test.cpp)
 add_executable(impedance_control src/impedance_control.cpp)
+add_executable(cartesian_motion src/cartesian_motion.cpp)
 
 # link libraries
 target_link_libraries(communication_test PRIVATE Franka::Franka Eigen3::Eigen)
 target_link_libraries(impedance_control PRIVATE Franka::Franka Eigen3::Eigen)
+target_link_libraries(cartesian_motion PRIVATE Franka::Franka Eigen3::Eigen)
 

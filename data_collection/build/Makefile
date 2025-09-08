@@ -142,6 +142,43 @@ impedance_control/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/impedance_control.dir/build.make CMakeFiles/impedance_control.dir/build
 .PHONY : impedance_control/fast
 
+#=============================================================================
+# Target rules for targets named cartesian_motion
+
+# Build rule for target.
+cartesian_motion: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 cartesian_motion
+.PHONY : cartesian_motion
+
+# fast build rule for target.
+cartesian_motion/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cartesian_motion.dir/build.make CMakeFiles/cartesian_motion.dir/build
+.PHONY : cartesian_motion/fast
+
+src/cartesian_motion.o: src/cartesian_motion.cpp.o
+.PHONY : src/cartesian_motion.o
+
+# target to build an object file
+src/cartesian_motion.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cartesian_motion.dir/build.make CMakeFiles/cartesian_motion.dir/src/cartesian_motion.cpp.o
+.PHONY : src/cartesian_motion.cpp.o
+
+src/cartesian_motion.i: src/cartesian_motion.cpp.i
+.PHONY : src/cartesian_motion.i
+
+# target to preprocess a source file
+src/cartesian_motion.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cartesian_motion.dir/build.make CMakeFiles/cartesian_motion.dir/src/cartesian_motion.cpp.i
+.PHONY : src/cartesian_motion.cpp.i
+
+src/cartesian_motion.s: src/cartesian_motion.cpp.s
+.PHONY : src/cartesian_motion.s
+
+# target to generate assembly for a file
+src/cartesian_motion.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cartesian_motion.dir/build.make CMakeFiles/cartesian_motion.dir/src/cartesian_motion.cpp.s
+.PHONY : src/cartesian_motion.cpp.s
+
 src/communication_test.o: src/communication_test.cpp.o
 .PHONY : src/communication_test.o
 
@@ -198,8 +235,12 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... cartesian_motion"
 	@echo "... communication_test"
 	@echo "... impedance_control"
+	@echo "... src/cartesian_motion.o"
+	@echo "... src/cartesian_motion.i"
+	@echo "... src/cartesian_motion.s"
 	@echo "... src/communication_test.o"
 	@echo "... src/communication_test.i"
 	@echo "... src/communication_test.s"

@@ -1,4 +1,4 @@
-sudo apt-get update
+
 # data_collection_pipeline
 This is a pipeline to collect data from human demonstrations for the Franka robot using an Intel RealSense D415 camera.
 
