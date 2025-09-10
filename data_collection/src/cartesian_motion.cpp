@@ -1,69 +1,58 @@
-// Copyright (c) 2017 Franka Emika GmbH
-// Use of this source code is governed by the Apache-2.0 license, see LICENSE
 #include <cmath>
+#include <fstream>
 #include <iostream>
-
+#include <sstream>
+#include <iterator>
+#include <vector>
+#include <array>
 #include <franka/exception.h>
 #include <franka/robot.h>
-
-/**
- * @example generate_cartesian_pose_motion.cpp
- * An example showing how to generate a Cartesian motion.
- *
- * @warning Before executing this example, make sure there is enough space in front of the robot.
- */
+#include <franka/model.h>
 
 int main() {
 
-  // launch the robot with the ip address of the robot
-  franka::Robot robot("172.17.6.164");
+  std::ifstream csv_file("/home/mikel/data_collection_pipeline/data/test_traj/demonstration.csv");
+  std::vector<std::array<double, 16>> poses;
+  std::string line;
+  while (std::getline(csv_file, line)) {
+    if (line.empty()) continue; // Skip empty lines
+    std::array<double, 16> pose{};
+    std::stringstream ss(line);
+    int i = 0;
+    std::string value;
+    while (std::getline(ss, value, ',') && i < 16) {
+      try {
+        pose[i++] = std::stod(value);
+      } catch (const std::invalid_argument&) {
+        break; // Skip this line if conversion fails
+      }
+    }
+    if (i == 16) poses.push_back(pose); // Only add if 16 values were read
+  }
 
   try {
-
-    // Start
-    std::cout << "WARNING: This example will move the robot! "
-              << "Please make sure to have the user stop button at hand!" << std::endl
-              << "Press Enter to continue..." << std::endl;
-    std::cin.ignore();
-    std::cout << "Finished moving to initial joint configuration." << std::endl;
-
-    // Set additional parameters always before the control loop, NEVER in the control loop!
-    // Set collision behavior.
+    franka::Robot robot("172.17.6.164");
     robot.setCollisionBehavior(
         {{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0}}, {{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0}},
         {{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0}}, {{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0}},
         {{20.0, 20.0, 20.0, 25.0, 25.0, 25.0}}, {{20.0, 20.0, 20.0, 25.0, 25.0, 25.0}},
         {{20.0, 20.0, 20.0, 25.0, 25.0, 25.0}}, {{20.0, 20.0, 20.0, 25.0, 25.0, 25.0}});
+    robot.setCartesianImpedance({{3000, 3000, 3000, 300, 300, 300}});
 
-    std::array<double, 16> initial_pose;
-    double time = 0.0;
-    robot.control([&time, &initial_pose](const franka::RobotState& robot_state,
-                                         franka::Duration period) -> franka::CartesianPose {
-      time += period.toSec();
 
-      if (time == 0.0) {
-        initial_pose = robot_state.O_T_EE_c;
+    size_t index = 0;
+    robot.control([&](const franka::RobotState &robot_state, franka::Duration time_step) -> franka::CartesianPose {
+      if (index >= poses.size() - 1) {
+        return franka::MotionFinished(franka::CartesianPose(poses.back()));
       }
-
-      constexpr double kRadius = 0.3;
-      double angle = M_PI / 4 * (1 - std::cos(M_PI / 5.0 * time));
-      double delta_x = kRadius * std::sin(angle);
-      double delta_z = kRadius * (std::cos(angle) - 1);
-
-      std::array<double, 16> new_pose = initial_pose;
-      new_pose[12] += delta_x;
-      new_pose[14] += delta_z;
-
-      if (time >= 10.0) {
-        std::cout << std::endl << "Finished motion, shutting down example" << std::endl;
-        return franka::MotionFinished(new_pose);
-      }
-      return new_pose;
+      // Send next pose
+      return franka::CartesianPose(poses[index++]);
     });
-  } catch (const franka::Exception& e) {
+  } catch (const franka::ControlException &e) {
+    std::cout << e.what() << std::endl;
+  } catch (const franka::Exception &e) {
     std::cout << e.what() << std::endl;
     return -1;
   }
-
   return 0;
 }

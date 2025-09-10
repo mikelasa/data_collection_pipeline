@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/impedance_control_save_data.dir/src/impedance_control_save_data.cpp.o -o impedance_control_save_data  -Wl,-rpath,/home/mikel/.local/lib /home/mikel/.local/lib/libfranka.so.0.9.2 

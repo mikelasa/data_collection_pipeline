@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/joint_motion.dir/src/joint_motion.cpp.o -o joint_motion  -Wl,-rpath,/home/mikel/.local/lib /home/mikel/.local/lib/libfranka.so.0.9.2 

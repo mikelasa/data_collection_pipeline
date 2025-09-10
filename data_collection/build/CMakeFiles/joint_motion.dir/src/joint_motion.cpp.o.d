@@ -1,5 +1,5 @@
-CMakeFiles/cartesian_motion.dir/src/cartesian_motion.cpp.o: \
- /home/mikel/data_collection_pipeline/data_collection/src/cartesian_motion.cpp \
+CMakeFiles/joint_motion.dir/src/joint_motion.cpp.o: \
+ /home/mikel/data_collection_pipeline/data_collection/src/joint_motion.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/11/cmath \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -86,8 +86,8 @@ CMakeFiles/cartesian_motion.dir/src/cartesian_motion.cpp.o: \
  /usr/include/c++/11/tr1/modified_bessel_func.tcc \
  /usr/include/c++/11/tr1/poly_hermite.tcc \
  /usr/include/c++/11/tr1/poly_laguerre.tcc \
- /usr/include/c++/11/tr1/riemann_zeta.tcc /usr/include/c++/11/fstream \
- /usr/include/c++/11/istream /usr/include/c++/11/ios \
+ /usr/include/c++/11/tr1/riemann_zeta.tcc /usr/include/c++/11/iostream \
+ /usr/include/c++/11/ostream /usr/include/c++/11/ios \
  /usr/include/c++/11/iosfwd /usr/include/c++/11/bits/stringfwd.h \
  /usr/include/c++/11/bits/memoryfwd.h /usr/include/c++/11/bits/postypes.h \
  /usr/include/c++/11/cwchar /usr/include/wchar.h \
@@ -171,22 +171,23 @@ CMakeFiles/cartesian_motion.dir/src/cartesian_motion.cpp.o: \
  /usr/include/c++/11/bits/streambuf_iterator.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/ctype_inline.h \
  /usr/include/c++/11/bits/locale_facets.tcc \
- /usr/include/c++/11/bits/basic_ios.tcc /usr/include/c++/11/ostream \
- /usr/include/c++/11/bits/ostream.tcc \
- /usr/include/c++/11/bits/istream.tcc /usr/include/c++/11/bits/codecvt.h \
+ /usr/include/c++/11/bits/basic_ios.tcc \
+ /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
+ /usr/include/c++/11/bits/istream.tcc /usr/include/c++/11/fstream \
+ /usr/include/c++/11/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
- /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/iostream \
- /usr/include/c++/11/sstream /usr/include/c++/11/bits/sstream.tcc \
- /usr/include/c++/11/iterator /usr/include/c++/11/bits/stream_iterator.h \
- /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_uninitialized.h \
+ /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/sstream \
+ /usr/include/c++/11/bits/sstream.tcc \
+ /home/mikel/.local/include/franka/exception.h \
+ /home/mikel/.local/include/franka/log.h /usr/include/c++/11/vector \
+ /usr/include/c++/11/bits/stl_uninitialized.h \
  /usr/include/c++/11/bits/stl_vector.h \
  /usr/include/c++/11/bits/stl_bvector.h \
- /usr/include/c++/11/bits/vector.tcc /usr/include/c++/11/array \
- /usr/include/c++/11/utility /usr/include/c++/11/bits/stl_relops.h \
- /home/mikel/.local/include/franka/exception.h \
- /home/mikel/.local/include/franka/log.h \
+ /usr/include/c++/11/bits/vector.tcc \
  /home/mikel/.local/include/franka/control_types.h \
+ /usr/include/c++/11/array /usr/include/c++/11/utility \
+ /usr/include/c++/11/bits/stl_relops.h \
  /home/mikel/.local/include/franka/robot_state.h \
  /home/mikel/.local/include/franka/duration.h /usr/include/c++/11/chrono \
  /usr/include/c++/11/ratio /usr/include/c++/11/ctime \
@@ -224,5 +225,4 @@ CMakeFiles/cartesian_motion.dir/src/cartesian_motion.cpp.o: \
  /usr/include/c++/11/bits/std_mutex.h \
  /usr/include/c++/11/bits/unique_lock.h \
  /home/mikel/.local/include/franka/command_types.h \
- /home/mikel/.local/include/franka/lowpass_filter.h \
- /home/mikel/.local/include/franka/model.h
+ /home/mikel/.local/include/franka/lowpass_filter.h

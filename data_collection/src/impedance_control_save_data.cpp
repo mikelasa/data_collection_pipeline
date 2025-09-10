@@ -17,12 +17,47 @@ int main ()
 {
     // launch the robot with the ip address of the robot
     franka::Robot robot("172.17.6.164");
+
+    //save directory
+    std::string save_directory = "/home/mikel/data_collection_pipeline/data/test_traj/demonstration.csv";
+
+    // Initialize data fields for the print thread.
+    // A thread for reading states and the other for control.
+    struct {
+        std::mutex mutex;
+        bool has_data;
+        std::array<double, 16> O_T_EE;
+    } save_data{};
+    std::atomic_bool running{true};
+
+    //start print thread
+    std::thread print_thread([&save_data, &running, save_directory]() {
+        std::ofstream file(save_directory);
+        if (!file) {
+            std::cerr << "Could not open file for writing: " << save_directory << std::endl;
+            return;
+        }
+            // save data
+            while (running) {
+                if (save_data.mutex.try_lock()) {
+                    if (save_data.has_data) {
+                        for (const auto& val : save_data.O_T_EE) file << val << ",";
+                        file << "\n";
+                        save_data.has_data = false;
+                    }
+                    save_data.mutex.unlock();
+                }
+                std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            }
+
+            file.close();
+        });
     
     try {
 
         // Compliance parameters
-        const double K_trans{50};
-        const double K_rot{5};
+        const double K_trans{0};
+        const double K_rot{0};
         const double k_nullspace_trans{0};
         const double k_nullspace_rot{0};
 
@@ -88,7 +123,7 @@ int main ()
         // Define the impedance control callback
         std::function<franka::Torques(const franka::RobotState&, franka::Duration)>
         impedance_control_callback = [&model, &stiffness, &damping, &null_stiffness, &null_damping, &q_d, &robot,
-                                      &position_d, &orientation_d](const franka::RobotState& robot_state,
+                                      &position_d, &orientation_d, &save_data](const franka::RobotState& robot_state,
                                         franka::Duration /*duration*/) -> franka::Torques {
 
             // get state variables
@@ -135,18 +170,31 @@ int main ()
 
             std::array<double, 7> tau_d_array{};
             Eigen::VectorXd::Map(&tau_d_array[0], 7) = tau_d;
-            //print the control command
-            std::cout << "Control command: " << tau_d.transpose() << std::endl;
+
+            // Update data to save
+            if (save_data.mutex.try_lock()) {
+                save_data.has_data = true;
+                save_data.O_T_EE = robot_state.O_T_EE;
+                save_data.mutex.unlock();
+            }
+
             return tau_d_array;
 
         };
 
     robot.control(impedance_control_callback, false, 1000.0);
 
+    //end thread
+    running = false;
+
     } catch (const franka::Exception& e) {
+        running = false;
         std::cout << e.what() << std::endl;
         return -1;
     }
 
+    if (print_thread.joinable()) {
+    print_thread.join();
+    }
   return 0;
 }

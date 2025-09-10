@@ -11,12 +11,14 @@ find_package(Franka 0.9.2 REQUIRED)
 find_package(Eigen3 REQUIRED)
 
 # executables
-add_executable(communication_test src/communication_test.cpp)
 add_executable(impedance_control src/impedance_control.cpp)
 add_executable(cartesian_motion src/cartesian_motion.cpp)
+add_executable(impedance_control_save_data src/impedance_control_save_data.cpp)
+add_executable(joint_motion src/joint_motion.cpp)
+
 
 # link libraries
-target_link_libraries(communication_test PRIVATE Franka::Franka Eigen3::Eigen)
 target_link_libraries(impedance_control PRIVATE Franka::Franka Eigen3::Eigen)
 target_link_libraries(cartesian_motion PRIVATE Franka::Franka Eigen3::Eigen)
-
+target_link_libraries(impedance_control_save_data PRIVATE Franka::Franka Eigen3::Eigen)
+target_link_libraries(joint_motion PRIVATE Franka::Franka Eigen3::Eigen)
