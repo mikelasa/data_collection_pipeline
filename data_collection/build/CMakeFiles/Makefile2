@@ -64,9 +64,7 @@ CMAKE_BINARY_DIR = /home/mikel/data_collection_pipeline/data_collection/build
 
 # The main recursive "all" target.
 all: CMakeFiles/impedance_control.dir/all
-all: CMakeFiles/cartesian_motion.dir/all
 all: CMakeFiles/impedance_control_save_data.dir/all
-all: CMakeFiles/joint_motion.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -75,9 +73,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/impedance_control.dir/clean
-clean: CMakeFiles/cartesian_motion.dir/clean
 clean: CMakeFiles/impedance_control_save_data.dir/clean
-clean: CMakeFiles/joint_motion.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -87,7 +83,7 @@ clean: CMakeFiles/joint_motion.dir/clean
 CMakeFiles/impedance_control.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/impedance_control.dir/build.make CMakeFiles/impedance_control.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/impedance_control.dir/build.make CMakeFiles/impedance_control.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles --progress-num=3,4 "Built target impedance_control"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles --progress-num=1,2 "Built target impedance_control"
 .PHONY : CMakeFiles/impedance_control.dir/all
 
 # Build rule for subdir invocation for target.
@@ -107,39 +103,13 @@ CMakeFiles/impedance_control.dir/clean:
 .PHONY : CMakeFiles/impedance_control.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/cartesian_motion.dir
-
-# All Build rule for target.
-CMakeFiles/cartesian_motion.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cartesian_motion.dir/build.make CMakeFiles/cartesian_motion.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cartesian_motion.dir/build.make CMakeFiles/cartesian_motion.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles --progress-num=1,2 "Built target cartesian_motion"
-.PHONY : CMakeFiles/cartesian_motion.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/cartesian_motion.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/cartesian_motion.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles 0
-.PHONY : CMakeFiles/cartesian_motion.dir/rule
-
-# Convenience name for target.
-cartesian_motion: CMakeFiles/cartesian_motion.dir/rule
-.PHONY : cartesian_motion
-
-# clean rule for target.
-CMakeFiles/cartesian_motion.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cartesian_motion.dir/build.make CMakeFiles/cartesian_motion.dir/clean
-.PHONY : CMakeFiles/cartesian_motion.dir/clean
-
-#=============================================================================
 # Target rules for target CMakeFiles/impedance_control_save_data.dir
 
 # All Build rule for target.
 CMakeFiles/impedance_control_save_data.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/impedance_control_save_data.dir/build.make CMakeFiles/impedance_control_save_data.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/impedance_control_save_data.dir/build.make CMakeFiles/impedance_control_save_data.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles --progress-num=5,6 "Built target impedance_control_save_data"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles --progress-num=3,4 "Built target impedance_control_save_data"
 .PHONY : CMakeFiles/impedance_control_save_data.dir/all
 
 # Build rule for subdir invocation for target.
@@ -157,32 +127,6 @@ impedance_control_save_data: CMakeFiles/impedance_control_save_data.dir/rule
 CMakeFiles/impedance_control_save_data.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/impedance_control_save_data.dir/build.make CMakeFiles/impedance_control_save_data.dir/clean
 .PHONY : CMakeFiles/impedance_control_save_data.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/joint_motion.dir
-
-# All Build rule for target.
-CMakeFiles/joint_motion.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/joint_motion.dir/build.make CMakeFiles/joint_motion.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/joint_motion.dir/build.make CMakeFiles/joint_motion.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles --progress-num=7,8 "Built target joint_motion"
-.PHONY : CMakeFiles/joint_motion.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/joint_motion.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/joint_motion.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles 0
-.PHONY : CMakeFiles/joint_motion.dir/rule
-
-# Convenience name for target.
-joint_motion: CMakeFiles/joint_motion.dir/rule
-.PHONY : joint_motion
-
-# clean rule for target.
-CMakeFiles/joint_motion.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/joint_motion.dir/build.make CMakeFiles/joint_motion.dir/clean
-.PHONY : CMakeFiles/joint_motion.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

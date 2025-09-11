@@ -21,10 +21,11 @@ int main ()
     try {
 
         // Compliance parameters
-        const double K_trans{50};
-        const double K_rot{5};
-        const double k_nullspace_trans{0};
-        const double k_nullspace_rot{0};
+        const double K_trans{200};
+        const double K_rot{20};
+
+        const double k_nullspace_trans{10};
+        const double k_nullspace_rot{1};
 
         //create the impedance matrixes
         Eigen::MatrixXd stiffness(6, 6), damping(6, 6);
@@ -71,8 +72,30 @@ int main ()
 
         // equilibrium point is the initial position
         Eigen::Affine3d initial_transform(Eigen::Matrix4d::Map(initial_state.O_T_EE.data()));
-        Eigen::Vector3d position_d(initial_transform.translation());
+        Eigen::Vector3d initial_position(initial_transform.translation());
+        Eigen::Vector3d target_position(0.430179, 0.0, 0.520758); // desired target
+        double trajectory_duration = 5.0; // seconds
+        Eigen::Vector3d position_d = initial_position;
         Eigen::Quaterniond orientation_d(initial_transform.rotation());
+
+        // Quintic trajectory generator
+        auto quintic_trajectory = [](const Eigen::Vector3d& p0, const Eigen::Vector3d& pf, double t, double T) {
+            double tau = std::min(std::max(t / T, 0.0), 1.0);
+            double tau2 = tau * tau;
+            double tau3 = tau2 * tau;
+            double tau4 = tau3 * tau;
+            double tau5 = tau4 * tau;
+            double s = 10 * tau3 - 15 * tau4 + 6 * tau5;
+            return p0 + s * (pf - p0);
+        };
+
+        // Precompute trajectory points
+        int traj_steps = static_cast<int>(trajectory_duration * 1000.0); // 1kHz
+        std::vector<Eigen::Vector3d> trajectory(traj_steps);
+        for (int i = 0; i < traj_steps; ++i) {
+            double t = static_cast<double>(i) / 1000.0;
+            trajectory[i] = quintic_trajectory(initial_position, target_position, t, trajectory_duration);
+        }
 
         // Define the desired joint configuration
         Eigen::VectorXd q_d(7);
@@ -88,8 +111,8 @@ int main ()
         // Define the impedance control callback
         std::function<franka::Torques(const franka::RobotState&, franka::Duration)>
         impedance_control_callback = [&model, &stiffness, &damping, &null_stiffness, &null_damping, &q_d, &robot,
-                                      &position_d, &orientation_d](const franka::RobotState& robot_state,
-                                        franka::Duration /*duration*/) -> franka::Torques {
+                                        &trajectory, &traj_steps, &position_d, &orientation_d](const franka::RobotState& robot_state,
+                                                            franka::Duration duration) -> franka::Torques {
 
             // get state variables
             std::array<double, 7> coriolis_array = model.coriolis(robot_state);
@@ -109,8 +132,12 @@ int main ()
             Eigen::MatrixXd jacobian_pinv = jacobian.completeOrthogonalDecomposition().solve(Eigen::MatrixXd::Identity(6, 6));
             Eigen::MatrixXd nullspace_projector = identity - jacobian.transpose() * jacobian_pinv.transpose();
 
-            // compute error to desired equilibrium pose
-            // position error
+            // Step through precomputed trajectory
+            static int traj_idx = 0;
+            if (traj_idx < traj_steps) {
+                position_d = trajectory[traj_idx];
+                ++traj_idx;
+            }
             Eigen::Matrix<double, 6, 1> error;
             error.head(3) << position - position_d;
 
@@ -135,8 +162,9 @@ int main ()
 
             std::array<double, 7> tau_d_array{};
             Eigen::VectorXd::Map(&tau_d_array[0], 7) = tau_d;
-            //print the control command
-            std::cout << "Control command: " << tau_d.transpose() << std::endl;
+            //print robot state
+            std::cout << "robot_state.O_T_EE: " << position.transpose() << " " << orientation.coeffs().transpose() << std::endl;
+
             return tau_d_array;
 
         };

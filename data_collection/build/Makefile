@@ -130,19 +130,6 @@ impedance_control/fast:
 .PHONY : impedance_control/fast
 
 #=============================================================================
-# Target rules for targets named cartesian_motion
-
-# Build rule for target.
-cartesian_motion: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 cartesian_motion
-.PHONY : cartesian_motion
-
-# fast build rule for target.
-cartesian_motion/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cartesian_motion.dir/build.make CMakeFiles/cartesian_motion.dir/build
-.PHONY : cartesian_motion/fast
-
-#=============================================================================
 # Target rules for targets named impedance_control_save_data
 
 # Build rule for target.
@@ -154,43 +141,6 @@ impedance_control_save_data: cmake_check_build_system
 impedance_control_save_data/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/impedance_control_save_data.dir/build.make CMakeFiles/impedance_control_save_data.dir/build
 .PHONY : impedance_control_save_data/fast
-
-#=============================================================================
-# Target rules for targets named joint_motion
-
-# Build rule for target.
-joint_motion: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 joint_motion
-.PHONY : joint_motion
-
-# fast build rule for target.
-joint_motion/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/joint_motion.dir/build.make CMakeFiles/joint_motion.dir/build
-.PHONY : joint_motion/fast
-
-src/cartesian_motion.o: src/cartesian_motion.cpp.o
-.PHONY : src/cartesian_motion.o
-
-# target to build an object file
-src/cartesian_motion.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cartesian_motion.dir/build.make CMakeFiles/cartesian_motion.dir/src/cartesian_motion.cpp.o
-.PHONY : src/cartesian_motion.cpp.o
-
-src/cartesian_motion.i: src/cartesian_motion.cpp.i
-.PHONY : src/cartesian_motion.i
-
-# target to preprocess a source file
-src/cartesian_motion.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cartesian_motion.dir/build.make CMakeFiles/cartesian_motion.dir/src/cartesian_motion.cpp.i
-.PHONY : src/cartesian_motion.cpp.i
-
-src/cartesian_motion.s: src/cartesian_motion.cpp.s
-.PHONY : src/cartesian_motion.s
-
-# target to generate assembly for a file
-src/cartesian_motion.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cartesian_motion.dir/build.make CMakeFiles/cartesian_motion.dir/src/cartesian_motion.cpp.s
-.PHONY : src/cartesian_motion.cpp.s
 
 src/impedance_control.o: src/impedance_control.cpp.o
 .PHONY : src/impedance_control.o
@@ -240,30 +190,6 @@ src/impedance_control_save_data.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/impedance_control_save_data.dir/build.make CMakeFiles/impedance_control_save_data.dir/src/impedance_control_save_data.cpp.s
 .PHONY : src/impedance_control_save_data.cpp.s
 
-src/joint_motion.o: src/joint_motion.cpp.o
-.PHONY : src/joint_motion.o
-
-# target to build an object file
-src/joint_motion.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/joint_motion.dir/build.make CMakeFiles/joint_motion.dir/src/joint_motion.cpp.o
-.PHONY : src/joint_motion.cpp.o
-
-src/joint_motion.i: src/joint_motion.cpp.i
-.PHONY : src/joint_motion.i
-
-# target to preprocess a source file
-src/joint_motion.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/joint_motion.dir/build.make CMakeFiles/joint_motion.dir/src/joint_motion.cpp.i
-.PHONY : src/joint_motion.cpp.i
-
-src/joint_motion.s: src/joint_motion.cpp.s
-.PHONY : src/joint_motion.s
-
-# target to generate assembly for a file
-src/joint_motion.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/joint_motion.dir/build.make CMakeFiles/joint_motion.dir/src/joint_motion.cpp.s
-.PHONY : src/joint_motion.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -272,22 +198,14 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... cartesian_motion"
 	@echo "... impedance_control"
 	@echo "... impedance_control_save_data"
-	@echo "... joint_motion"
-	@echo "... src/cartesian_motion.o"
-	@echo "... src/cartesian_motion.i"
-	@echo "... src/cartesian_motion.s"
 	@echo "... src/impedance_control.o"
 	@echo "... src/impedance_control.i"
 	@echo "... src/impedance_control.s"
 	@echo "... src/impedance_control_save_data.o"
 	@echo "... src/impedance_control_save_data.i"
 	@echo "... src/impedance_control_save_data.s"
-	@echo "... src/joint_motion.o"
-	@echo "... src/joint_motion.i"
-	@echo "... src/joint_motion.s"
 .PHONY : help
 
 

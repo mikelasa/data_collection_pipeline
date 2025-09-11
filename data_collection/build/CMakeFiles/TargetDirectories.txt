@@ -1,6 +1,4 @@
 /home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles/impedance_control.dir
-/home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles/cartesian_motion.dir
 /home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles/impedance_control_save_data.dir
-/home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles/joint_motion.dir
 /home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles/edit_cache.dir
 /home/mikel/data_collection_pipeline/data_collection/build/CMakeFiles/rebuild_cache.dir
